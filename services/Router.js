@@ -29,17 +29,14 @@ const Router = {
 
     switch (route) {
       case '/':
-        pageElement = document.createElement('h1');
-        pageElement.textContent = 'Menu';
+        pageElement = document.createElement('menu-page');
         break;
       case '/order':
-        pageElement = document.createElement('h1');
-        pageElement.textContent = 'Your Order';
+        pageElement = document.createElement('order-Page');
         break;
       default:
         if (route.startsWith("product-")) {
-          pageElement = document.createElement('h1');
-          pageElement.textContent = 'Details';
+          pageElement = document.createElement('details-page');
           const paramsId = route.substring(route.lastIndexOf('-') + 1);
           pageElement.dataset.id = paramsId;
         }
@@ -48,6 +45,7 @@ const Router = {
     if (pageElement) {
       const cache = document.querySelector('main');
       //document.querySelector('main').innerHTML = '';
+
       if (cache.children[0]) cache.children[0].remove();
 
       cache.appendChild(pageElement);
