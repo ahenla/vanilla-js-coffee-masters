@@ -25,6 +25,36 @@ export class MenuPage extends HTMLElement {
     const template = document.getElementById('menu-page-template');
     const content = template.content.cloneNode(true);
     this.root.appendChild(content) // attach to the shadow dom
+
+    window.addEventListener('storeMenuUpdate', (event) => {
+      this.render();
+    });
+  }
+
+  render() {
+    if (app.store.menu) {
+      //cleaning the menu element
+      this.root.querySelector('#menu').innerHTML = '';
+
+      for (let category of app.store.menu) {
+        const liCategory = document.createElement('li');
+        liCategory.innerHTML = `
+          <h3>${category.name}</h3>
+          <ul class="categoy"></ul>
+        `;
+        this.root.querySelector('#menu').appendChild(liCategory)
+
+        //create the items for the categories
+        category.products.forEach(product => {
+          //creating a custom html element
+          const item = document.createElement('product-item');
+          item.dataset.product = JSON.stringify(product)
+          liCategory.querySelector('ul').appendChild(item)
+        });
+      }
+    } else {
+      this.root.querySelector('#menu').innerHTML = 'Loading...'
+    }
   }
 }
 

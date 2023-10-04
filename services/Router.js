@@ -44,8 +44,8 @@ const Router = {
 
     if (pageElement) {
       const cache = document.querySelector('main');
-      //document.querySelector('main').innerHTML = '';
 
+      //document.querySelector('main').innerHTML = '';
       if (cache.children[0]) cache.children[0].remove();
 
       cache.appendChild(pageElement);
