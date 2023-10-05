@@ -29,6 +29,7 @@ export class MenuPage extends HTMLElement {
     window.addEventListener('storeMenuUpdate', (event) => {
       this.render();
     });
+    this.render()
   }
 
   render() {
