@@ -9,7 +9,7 @@ const Router = {
         Router.go(url);
       })
     })
-    //add eventhandler for url changes
+    //add event handler for url changes
     window.addEventListener('popstate', event => {
       Router.go(event.state.route, false) //history API -> history.pushState({ route }, null, route)
     })
@@ -22,10 +22,10 @@ const Router = {
     console.log(`route to ${route}`);
 
     if (addToHistory) {
-      history.pushState({ route }, null, route)
+      history.pushState({ route }, '', route)
     }
 
-    let pageElement = '';
+    let pageElement = null;
 
     switch (route) {
       case '/':
@@ -40,6 +40,7 @@ const Router = {
           const paramsId = route.substring(route.lastIndexOf('-') + 1);
           pageElement.dataset.id = paramsId;
         }
+        break;
     }
 
     if (pageElement) {
